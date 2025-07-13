@@ -8,7 +8,7 @@ import {
 import { PartialType, ApiProperty } from '@nestjs/swagger';
 
 export class CreateProductDto {
-  @ApiProperty()
+  @ApiProperty({ description: "Product's name" })
   @IsString()
   @IsNotEmpty()
   readonly name: string;
@@ -36,10 +36,4 @@ export class CreateProductDto {
   readonly image: string;
 }
 
-export class UpdateProductDto extends PartialType(CreateProductDto) {
-  readonly name?: string;
-  readonly description?: string;
-  readonly price?: number;
-  readonly stock?: number;
-  readonly image?: string;
-}
+export class UpdateProductDto extends PartialType(CreateProductDto) {}

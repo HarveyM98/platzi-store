@@ -45,7 +45,6 @@ export class ProductsController {
 
   @Get(':productId')
   @HttpCode(HttpStatus.ACCEPTED)
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
   getProduct(@Param('productId', ParseIntPipe) productId: number) {
     //Con Express
     // return response.status(200).send({
@@ -56,24 +55,19 @@ export class ProductsController {
 
   @Post()
   create(@Body() payload: CreateProductDto) {
-    // return {
-    //   message: 'accion de crear',
-    //   payload,
-    // };
     return this.productsService.create(payload);
   }
 
   @Put(':id')
-  update(@Param('id') id: string, @Body() payload: UpdateProductDto) {
-    // return {
-    //   id,
-    //   payload,
-    // };
-    return this.productsService.update(+id, payload);
+  update(
+    @Param('id', ParseIntPipe) id: number,
+    @Body() payload: UpdateProductDto,
+  ) {
+    return this.productsService.update(id, payload);
   }
 
   @Delete(':id')
-  delete(@Param('id') id: string) {
-    return this.productsService.remove(+id);
+  delete(@Param('id', ParseIntPipe) id: number) {
+    return this.productsService.remove(id);
   }
 }
